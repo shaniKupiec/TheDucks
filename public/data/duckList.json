@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "img_num": 1,
+    "occupation": "bachelor"
+  },
+  {
+    "id": 2,
+    "img_num": 2,
+    "occupation": "couple"
+  },
+  {
+    "id": 3,
+    "img_num": 3,
+    "occupation": "doctor"
+  },
+  {
+    "id": 4,
+    "img_num": 4,
+    "occupation": "unicorn"
+  }
+]
