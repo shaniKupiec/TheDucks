@@ -1,0 +1,3 @@
+interface Rabbit {
+    id: number;
+  }
