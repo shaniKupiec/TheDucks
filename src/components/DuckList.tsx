@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
 import DuckItem from './DuckItem';
-import Duck from '../interfaces/DuckInterface'
+import IDuck from '../interfaces/DuckInterface'
 
 function DuckList() {
-  const [duckList, setDuckList] = useState<Duck[]>([]);
+  const [duckList, setDuckList] = useState<IDuck[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('/public/data/duckList.json');
-        const data: Duck[] = await response.json();
+        const data: IDuck[] = await response.json();
         setDuckList(data);
       } catch (error) {
         console.error('Error fetching JSON data:', error);
