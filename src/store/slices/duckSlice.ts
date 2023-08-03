@@ -23,8 +23,6 @@ export const duckSlice = createSlice({
       state.duck_list =action.payload;
     },
     DUPLICATE: (state, action: PayloadAction<number>) => {
-      // console.log("got to here: id is: ", action.payload);
-      // console.log("state.duck_list[state.duck_list.length - 1].id, ", state.duck_list[state.duck_list.length - 1].id);
       let duckToDuplicate: IDuck | undefined = state.duck_list.find((duck: IDuck) => {
         return duck.id == action.payload;
       });
@@ -35,10 +33,10 @@ export const duckSlice = createSlice({
       }
     },
     REMOVE: (state, action: PayloadAction<number>) => {
-      let idx :number = state.duck_list.findIndex((duck: IDuck) => {
+      let idxDuckToRemove :number = state.duck_list.findIndex((duck: IDuck) => {
         return duck.id == action.payload;
       });
-      state.duck_list.splice(idx, 1);
+      state.duck_list.splice(idxDuckToRemove, 1);
     },
   },
 });

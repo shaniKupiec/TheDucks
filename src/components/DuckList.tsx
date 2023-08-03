@@ -4,7 +4,6 @@ import { useAppSelector } from '../store/hooks';
 import { selectDucks } from '../store/slices/duckSlice';
 
 function DuckList() {
-  //const duckList: IDuck[] = useAppSelector((state) => state.ducks.duck_list)
   const duckList: IDuck[] = useAppSelector(selectDucks)
 
   return (
