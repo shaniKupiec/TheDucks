@@ -1,15 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from '../index'
-import iDuck from "../../interfaces/DuckInterface";
+import IDuck from "../../interfaces/DuckInterface";
 
 export interface DuckState {
-  duck_list: iDuck[];
+  duck_list: IDuck[];
 }
 
 const initialState: DuckState = {
     duck_list: [],
 };
+
+export const fetchDucks: any = createAsyncThunk(
+  'ducks/fetchDucks',
+  async () => {
+    const response = await fetch('/public/data/duckList.json');
+    return (await response.json()) as IDuck[];
+  }
+)
 
 export const duckSlice = createSlice({
   name: "ducks",
@@ -50,7 +58,7 @@ export const duckSlice = createSlice({
     duplicate: (state, action: PayloadAction<number>) => {
       // console.log("got to here: id is: ", action.payload);
       // console.log("state.duck_list[state.duck_list.length - 1].id, ", state.duck_list[state.duck_list.length - 1].id);
-      let duckToDuplicate: iDuck | undefined = state.duck_list.find((duck: iDuck) => {
+      let duckToDuplicate: IDuck | undefined = state.duck_list.find((duck: IDuck) => {
         return duck.id == action.payload;
       });
       if(duckToDuplicate != undefined){
@@ -60,12 +68,17 @@ export const duckSlice = createSlice({
       }
     },
     remove: (state, action: PayloadAction<number>) => {
-      let idx :number = state.duck_list.findIndex((duck: iDuck) => {
+      let idx :number = state.duck_list.findIndex((duck: IDuck) => {
         return duck.id == action.payload
       });
       state.duck_list.splice(idx, 1);
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchDucks.fulfilled, (state, action) => {
+      state.duck_list = action.payload;
+    })
+  }
 });
 
 // Action creators are generated for each case reducer function

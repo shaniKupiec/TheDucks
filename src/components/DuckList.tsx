@@ -1,12 +1,18 @@
-//import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from "react-redux";
 import DuckItem from './DuckItem';
 import IDuck from '../interfaces/DuckInterface'
 import { useAppSelector } from '../store/hooks';
-import { selectDucks } from '../store/slices/duckSlice';
+import { selectDucks, load, fetchDucks } from '../store/slices/duckSlice';
 
 function DuckList() {
   //const duckList: IDuck[] = useAppSelector((state) => state.ducks.duck_list)
   const duckList: IDuck[] = useAppSelector(selectDucks)
+  const dispatch = useDispatch();
+
+  useEffect(() => { 
+    dispatch(fetchDucks());
+  }, [])
 
 
   return (
