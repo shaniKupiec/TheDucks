@@ -4,17 +4,19 @@ import duckImage1 from '../assets/images/ducks/bachelor.png';
 import duckImage2 from '../assets/images/ducks/couple.png';
 import duckImage3 from '../assets/images/ducks/doctor.png';
 import duckImage4 from '../assets/images/ducks/unicorn.png';
+import { useDispatch } from 'react-redux';
+import { duplicate, remove } from '../store/slices/duckSlice';
 
 
 function DuckItem({ duck }: { duck: IDuck }) {
     var imageSrc = [duckImage1, duckImage2, duckImage3, duckImage4];
+    const dispatch = useDispatch();
 
-
-    const onAdd = () => {
-        
+    const onDuplicate = () => {
+        dispatch(duplicate(duck.id));
     }
-    const onDelete = () => {
-
+    const onRemove = () => {
+        dispatch(remove(duck.id));
     }
 
     return (
@@ -23,8 +25,8 @@ function DuckItem({ duck }: { duck: IDuck }) {
             <div>occupation : {duck.occupation}</div>
             <div>id : {duck.id}</div>
             <div>name : {duck.name}</div>
-            <button className="add" onClick={onAdd}>Duplicate</button>
-            <button className="delete" onClick={onDelete}>Delete</button>
+            <button className="duplicate" onClick={onDuplicate}>Duplicate</button>
+            <button className="remove" onClick={onRemove}>Remove</button>
         </div>
     );
 }
