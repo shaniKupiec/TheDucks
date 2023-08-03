@@ -5,7 +5,7 @@ import duckImage2 from '../assets/images/ducks/couple.png';
 import duckImage3 from '../assets/images/ducks/doctor.png';
 import duckImage4 from '../assets/images/ducks/unicorn.png';
 import { useDispatch } from 'react-redux';
-import { duplicate, remove } from '../store/slices/duckSlice';
+import { DUPLICATE, REMOVE } from '../store/slices/duckSlice';
 
 
 function DuckItem({ duck }: { duck: IDuck }) {
@@ -13,10 +13,10 @@ function DuckItem({ duck }: { duck: IDuck }) {
     const dispatch = useDispatch();
 
     const onDuplicate = () => {
-        dispatch(duplicate(duck.id));
+        dispatch(DUPLICATE(duck.id));
     }
     const onRemove = () => {
-        dispatch(remove(duck.id));
+        dispatch(REMOVE(duck.id));
     }
 
     return (
