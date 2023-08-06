@@ -1,7 +1,8 @@
-interface Duck {
+interface IDuck {
     id: number;
     img_num: number;
     occupation: string;
+    name: string;
   }
 
-export default Duck;
+export default IDuck;
