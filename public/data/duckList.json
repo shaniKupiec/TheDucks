@@ -1,26 +1,34 @@
 [
   {
     "id": 1,
-    "img_num": 1,
-    "occupation": "bachelor",
-    "name" : "Shani"
+    "img_src": "https://duckyou.shop/wp-content/uploads/2020/11/Cop-300x300.png",
+    "occupation": "Cop",
+    "name" : "Nono",
+    "latitude": 31.903410,
+    "longitude": 34.806831
   },
   {
     "id": 2,
-    "img_num": 2,
-    "occupation": "couple",
-    "name" : "Mimi & Nono"
+    "img_src": "https://duckyou.shop/wp-content/uploads/2020/11/hairdresser-1-300x300.png",
+    "occupation": "Hair Dresser",
+    "name" : "Koko",
+    "latitude": 40.712776,
+    "longitude": -74.005974
   },
   {
     "id": 3,
-    "img_num": 3,
-    "occupation": "doctor",
-    "name" : "Hodaya"
+    "img_src": "https://duckyou.shop/wp-content/uploads/2021/05/champagne-1-300x300.png",
+    "occupation": "Champagne",
+    "name" : "Momo",
+    "latitude": 35.126411,
+    "longitude": 33.429859
   },
   {
     "id": 4,
-    "img_num": 4,
-    "occupation": "unicorn",
-    "name" : "Tamir"
+    "img_src": "https://duckyou.shop/wp-content/uploads/2020/11/bowling-2-300x300.png",
+    "occupation": "Bowling",
+    "name" : "Popo",
+    "latitude": 40.741895,
+    "longitude": -73.989308
   }
 ]
