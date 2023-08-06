@@ -1,39 +1,26 @@
-import { useEffect, useState } from 'react';
 import DuckItem from './DuckItem';
-import Duck from '../interfaces/DuckInterface'
+import IDuck from '../interfaces/DuckInterface'
+import { useAppSelector } from '../store/hooks';
+import { selectDucks } from '../store/slices/duckSlice';
 
 function DuckList() {
-  const [duckList, setDuckList] = useState<Duck[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('/public/data/duckList.json');
-        const data: Duck[] = await response.json();
-        setDuckList(data);
-      } catch (error) {
-        console.error('Error fetching JSON data:', error);
-      }
-    };
-    fetchData();
-  }, []);
-
-
-  // Render your component based on the duckList state
-  if (duckList === null) {
-    return <div>Loading...</div>;
-  }
+  const duckList: IDuck[] = useAppSelector(selectDucks)
 
   return (
     <div className='duck-list'>
-     <h1 className='duck-list__title' >Duck List</h1>
-      <ul className='duck-list__container'>
-        {duckList.map((duck) => (
-          <li key={duck.id}>
-           <DuckItem key={duck.id} duck={duck} />
-          </li>
-        ))}
-      </ul>
+      {
+        duckList.length == 0 ? <div>Loading...</div> : 
+      <>
+        <h1 className='duck-list__title' >Duck List</h1>
+          <ul className='duck-list__container'>
+            {duckList.map((duck) => (
+              <li key={duck.id}>
+                <DuckItem key={duck.id} duck={duck} />
+              </li>
+            ))}
+          </ul>
+      </>
+      }
     </div>
   );
 }
