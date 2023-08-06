@@ -12,8 +12,8 @@
     "img_src": "https://duckyou.shop/wp-content/uploads/2020/11/hairdresser-1-300x300.png",
     "occupation": "Hair Dresser",
     "name" : "Koko",
-    "latitude": 40.712776,
-    "longitude": -74.005974
+    "latitude": -4.0433492322523445,
+    "longitude": 39.53240880188156
   },
   {
     "id": 3,
@@ -28,7 +28,7 @@
     "img_src": "https://duckyou.shop/wp-content/uploads/2020/11/bowling-2-300x300.png",
     "occupation": "Bowling",
     "name" : "Popo",
-    "latitude": 40.741895,
-    "longitude": -73.989308
+    "latitude": -73.989308,
+    "longitude": 40.741895
   }
 ]

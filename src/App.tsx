@@ -25,8 +25,8 @@ function App() {
   
   return (
     <>
+      <MapComponent /> 
       <DuckList/>
-      {/* <MapComponent /> */}
     </>
   );
 }
