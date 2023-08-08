@@ -14,7 +14,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => { 
-    const fetchData = async() => {
+    const fetchData = async(): Promise<void> => {
       try{
         const featchedDucks: IDuck[] = await fetchDucks();
         dispatch(LOAD_DUCKS(featchedDucks));
@@ -32,8 +32,10 @@ function App() {
   return (
     <>
       <MapComponent /> 
-      <DuckList/>
-      <RabbitList/>
+      <div className="lists">
+        <DuckList/>
+        <RabbitList/>
+      </div>
     </>
   );
 }

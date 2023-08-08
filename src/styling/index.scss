@@ -1,9 +1,13 @@
 @import './other/default.scss';
 
+//components
 @import './components/duckList';
 @import './components/duckItem';
 
 @import './components/rabbitList';
 @import './components/rabbitItem';
 
-@import './components/map.scss';
+@import './components/map';
+
+//pages
+@import './pages/app';

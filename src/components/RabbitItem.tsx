@@ -6,10 +6,10 @@ import IRabbit from '../interfaces/RabbitInterface';
 function RabbitItem({ rabbit }: { rabbit: IRabbit }) {
     const dispatch = useDispatch();
 
-    const onDuplicate = () => {
+    const onDuplicate = (): void => {
         dispatch(DUPLICATE(rabbit.id));
     }
-    const onRemove = () => {
+    const onRemove = (): void => {
         dispatch(REMOVE(rabbit.id));
     }
 

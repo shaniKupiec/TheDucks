@@ -6,10 +6,10 @@ import { DUPLICATE, REMOVE } from '../store/slices/duckSlice';
 function DuckItem({ duck }: { duck: IDuck }) {
     const dispatch = useDispatch();
 
-    const onDuplicate = () => {
+    const onDuplicate = (): void => {
         dispatch(DUPLICATE(duck.id));
     }
-    const onRemove = () => {
+    const onRemove = (): void => {
         dispatch(REMOVE(duck.id));
     }
 
