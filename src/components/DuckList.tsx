@@ -12,13 +12,13 @@ function DuckList() {
         duckList.length == 0 ? <div>Loading...</div> : 
       <>
         <h1 className='duck-list__title' >Duck List</h1>
-          <ul className='duck-list__container'>
+          <div className='duck-list__container'>
             {duckList.map((duck) => (
-              <li key={duck.id}>
+              <div key={duck.id}>
                 <DuckItem key={duck.id} duck={duck} />
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
       </>
       }
     </div>

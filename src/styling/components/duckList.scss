@@ -1,14 +1,14 @@
 .duck-list {
-    
-    &__title{
-        color: rgba(136, 110, 4, 0.87);
-        font-size: 60px;
-    }
-    
-    &__container{
-          display: grid; 
-          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-          gap: 50px 50px;
 
-      }
+  &__title {
+    color: rgba(136, 110, 4, 0.87);
+    font-size: 60px;
   }
+
+  &__container {
+    width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 50px;
+  }
+}
