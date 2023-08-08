@@ -1,11 +1,4 @@
-import RabbitItem from './RabbitItem';
-import IRabbit from '../interfaces/RabbitInterface'
-import { useAppSelector } from '../store/hooks';
-// import { selectRabbits } from '../store/slices/rabbitSlice';
-
-function RabbitList() {
-// const rabbitList: IRabbit[] = useAppSelector(selectRabbits);
-const rabbitList: IRabbit[] = [
+[
     {
       "id": 1,
       "img_src": "https://cdn.shopify.com/s/files/1/0529/8693/7544/products/AN573_840px_360x.png?v=1623686382",
@@ -38,25 +31,4 @@ const rabbitList: IRabbit[] = [
       "latitude": 36.597889,
       "longitude": -98.867312
     }
-  ];
-
-  return (
-    <div className='rabbit-list'>
-      {
-        rabbitList.length == 0 ? <div>Loading...</div> : 
-      <>
-        <h1 className='rabbit-list__title' >Rabbit List</h1>
-          <ul className='rabbit-list__container'>
-            {rabbitList.map((rabbit) => (
-              <li key={rabbit.id}>
-                <RabbitItem key={rabbit.id} rabbit={rabbit} />
-              </li>
-            ))}
-          </ul>
-      </>
-      }
-    </div>
-  );
-}
-
-export default RabbitList;
+  ]

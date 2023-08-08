@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { LOAD } from "./store/slices/duckSlice";
 import { fetchDucks } from "./services/duckService";
 import IDuck from "./interfaces/DuckInterface";
+import RabbitList from "./components/RabbitList";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ function App() {
   return (
     <>
       <DuckList/>
+      <RabbitList/>
     </>
   );
 }
