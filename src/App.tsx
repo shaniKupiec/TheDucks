@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import DuckList from "./components/DuckList";
+import MapComponent from './Map/MapComponent';
 import { useDispatch } from "react-redux";
 import { LOAD as LOAD_DUCKS } from "./store/slices/duckSlice";
 import { LOAD as LOAD_RABBITS } from "./store/slices/rabbitSlice";
@@ -30,6 +31,7 @@ function App() {
   
   return (
     <>
+      <MapComponent /> 
       <DuckList/>
       <RabbitList/>
     </>
