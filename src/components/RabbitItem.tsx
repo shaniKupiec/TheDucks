@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-//import { DUPLICATE, REMOVE } from '../store/slices/duckSlice';
+import { DUPLICATE, REMOVE } from '../store/slices/rabbitSlice';
 import IRabbit from '../interfaces/RabbitInterface';
 
 
@@ -7,10 +7,10 @@ function RabbitItem({ rabbit }: { rabbit: IRabbit }) {
     const dispatch = useDispatch();
 
     const onDuplicate = () => {
-        //dispatch(DUPLICATE(rabbit.id));
+        dispatch(DUPLICATE(rabbit.id));
     }
     const onRemove = () => {
-        //dispatch(REMOVE(rabbit.id));
+        dispatch(REMOVE(rabbit.id));
     }
 
     return (
