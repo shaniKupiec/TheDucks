@@ -2,23 +2,24 @@ import DuckItem from './DuckItem';
 import IDuck from '../interfaces/DuckInterface'
 import { useAppSelector } from '../store/hooks';
 import { selectDucks } from '../store/slices/duckSlice';
+import { StyledGridContainer, StyledTitle } from '../styling/components/List';
 
 function DuckList() {
   const duckList: IDuck[] = useAppSelector(selectDucks)
 
   return (
-    <div className='duck-list'>
+    <div>
       {
         duckList.length == 0 ? <div>Loading...</div> : 
       <>
-        <h1 className='duck-list__title' >Duck List</h1>
-          <div className='duck-list__container'>
+        <StyledTitle>Duck List</StyledTitle>
+          <StyledGridContainer>
             {duckList.map((duck) => (
               <div key={duck.id}>
                 <DuckItem key={duck.id} duck={duck} />
               </div>
             ))}
-          </div>
+          </StyledGridContainer>
       </>
       }
     </div>

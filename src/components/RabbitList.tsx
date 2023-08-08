@@ -2,23 +2,24 @@ import RabbitItem from './RabbitItem';
 import IRabbit from '../interfaces/RabbitInterface'
 import { useAppSelector } from '../store/hooks';
 import { selectRabbits } from '../store/slices/rabbitSlice';
+import { StyledGridContainer, StyledTitle } from '../styling/components/List';
 
 function RabbitList() {
   const rabbitList: IRabbit[] = useAppSelector(selectRabbits);
 
   return (
-    <div className='rabbit-list'>
+    <div>
       {
         rabbitList.length == 0 ? <div>Loading...</div> : 
       <>
-        <h1 className='rabbit-list__title' >Rabbit List</h1>
-          <ul className='rabbit-list__container'>
+        <StyledTitle>Rabbit List</StyledTitle>
+          <StyledGridContainer>
             {rabbitList.map((rabbit) => (
               <li key={rabbit.id}>
                 <RabbitItem key={rabbit.id} rabbit={rabbit} />
               </li>
             ))}
-          </ul>
+          </StyledGridContainer>
       </>
       }
     </div>

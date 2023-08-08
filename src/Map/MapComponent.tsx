@@ -12,6 +12,7 @@ import IRabbit from "../interfaces/RabbitInterface";
 import { selectDucks } from "../store/slices/duckSlice";
 import { selectRabbits } from "../store/slices/rabbitSlice";
 import { useAppSelector } from "../store/hooks";
+import { StyledMap } from "../styling/components/Map";
 
 function MapComponent() {
   //const [map, setMap] = useState<Map | undefined>(undefined);
@@ -84,7 +85,7 @@ function MapComponent() {
 
   return (
     <>
-      <div id="map" style={{ width: "100%", height: "400px" }} />;
+      <StyledMap id="map" style={{ width: "100%", height: "400px" }} />;
     </>
   );
 }

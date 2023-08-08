@@ -9,6 +9,7 @@ import IDuck from "./interfaces/DuckInterface";
 import RabbitList from "./components/RabbitList";
 import IRabbit from "./interfaces/RabbitInterface";
 import { fetchRabbits } from "./services/rabbitService";
+import { StyledLists } from "./styling/pages/App";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,10 +33,10 @@ function App() {
   return (
     <>
       <MapComponent /> 
-      <div className="lists">
+      <StyledLists>
         <DuckList/>
         <RabbitList/>
-      </div>
+      </StyledLists>
     </>
   );
 }

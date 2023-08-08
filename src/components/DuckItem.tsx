@@ -1,6 +1,7 @@
 import IDuck from '../interfaces/DuckInterface'
 import { useDispatch } from 'react-redux';
 import { DUPLICATE, REMOVE } from '../store/slices/duckSlice';
+import { StyledAddBtn, StyledImage, StyledRemoveBtn } from '../styling/components/Item';
 
 
 function DuckItem({ duck }: { duck: IDuck }) {
@@ -15,12 +16,12 @@ function DuckItem({ duck }: { duck: IDuck }) {
 
     return (
         <div className="duck-item">
-            <img src={duck.img_src} alt={duck.occupation} />
+            <StyledImage src={duck.img_src} alt={duck.occupation} />
             <div>occupation : {duck.occupation}</div>
             <div>id : {duck.id}</div>
             <div>name : {duck.name}</div>
-            <button className="duplicate" onClick={onDuplicate}>Duplicate</button>
-            <button className="remove" onClick={onRemove}>Remove</button>
+            <StyledAddBtn className="duplicate" onClick={onDuplicate}>Duplicate</StyledAddBtn>
+            <StyledRemoveBtn className="remove" onClick={onRemove}>Remove</StyledRemoveBtn>
         </div>
     );
 }

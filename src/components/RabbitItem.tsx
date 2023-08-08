@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { DUPLICATE, REMOVE } from '../store/slices/rabbitSlice';
 import IRabbit from '../interfaces/RabbitInterface';
+import { StyledAddBtn, StyledImage, StyledRemoveBtn } from '../styling/components/Item';
 
 
 function RabbitItem({ rabbit }: { rabbit: IRabbit }) {
@@ -15,12 +16,12 @@ function RabbitItem({ rabbit }: { rabbit: IRabbit }) {
 
     return (
         <div className="duck-item">
-            <img src={rabbit.img_src} alt={rabbit.name} />
+            <StyledImage src={rabbit.img_src} alt={rabbit.name} />
             <div>ear length : {rabbit.ear_len}</div>
             <div>id : {rabbit.id}</div>
             <div>name : {rabbit.name}</div>
-            <button className="duplicate" onClick={onDuplicate}>Duplicate</button>
-            <button className="remove" onClick={onRemove}>Remove</button>
+            <StyledAddBtn className="duplicate" onClick={onDuplicate}>Duplicate</StyledAddBtn>
+            <StyledRemoveBtn className="remove" onClick={onRemove}>Remove</StyledRemoveBtn>
         </div>
     );
 }
