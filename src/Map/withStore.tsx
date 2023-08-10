@@ -15,37 +15,28 @@ import { useAppSelector } from "../store/hooks";
 import { StyledMap } from "../styling/components/Map";
 
 function MapComponent() {
-  var map: Map;
+  const [map, setMap] = useState<Map | undefined>(undefined);
+
   const duckList: IDuck[] = useAppSelector(selectDucks);
   const rabbitList: IRabbit[] = useAppSelector(selectRabbits);
 
   useEffect(() => {
     if (!duckList.length || !rabbitList.length || map) return;
-    map = createMap();
+    createMap(); // await or something
 
-    var feature: Feature;
-    // ducks
-    var duckFeatures: Feature[] = [];
     for (let index = 0; index < duckList.length; index++) {
-      feature = createFeature(duckList[index]);
-      duckFeatures.push(feature);
+      createVectorLayer(duckList[index]);
     }
-    const duckLayer: VectorLayer<Vector<Geometry>> = createVectorLayer(duckFeatures);
-    map.addLayer(duckLayer);
-    var rabbitFeatures: Feature[] = [];
     for (let index = 0; index < rabbitList.length; index++) {
-      feature = createFeature(rabbitList[index]);
-      rabbitFeatures.push(feature);
+      createVectorLayer(rabbitList[index]);
     }
-    const rabbitLayer: VectorLayer<Vector<Geometry>> = createVectorLayer(rabbitFeatures);
-    map.addLayer(rabbitLayer);
     return () => {
       //map.dispose();
     };
   }, [duckList, rabbitList]);
 
-  const createMap = (): Map => {
-    var newMap = new Map({
+  const createMap = () => {
+    const newMap = new Map({
       layers: [
         new TileLayer({
           source: new OSM(),
@@ -57,32 +48,42 @@ function MapComponent() {
         zoom: 1,
       }),
     });
-    return newMap;
+    setMap(newMap);
   };
 
-  const createVectorLayer = (features: Feature[]): VectorLayer<Vector<Geometry>> => {
+  const createVectorLayer = ({
+    latitude,
+    longitude,
+    img_src,
+  }: {
+    latitude: number;
+    longitude: number;
+    img_src: string;
+  }): void => {
+    var feature: Feature<Geometry> = addFeatureToLayer(latitude, longitude);
     var layer: VectorLayer<Vector<Geometry>> = new VectorLayer({
       source: new Vector({
-        features,
-      })
+        features: [
+          feature
+        ],
+      }),
+      style: new Style({
+        image: new Icon({
+          src: img_src,
+          scale: 0.25,
+        }),
+        zIndex: 100,
+      }),
     });
-    return layer;
+    const updatedMap = JSON.parse(JSON.stringify(map)); // it doesnt work
+    updatedMap.addLayer(layer);
+    setMap(updatedMap);
   };
 
-  const createFeature = ({latitude,longitude,img_src}: {latitude: number;longitude: number;img_src: string;}): Feature => {
-    var feature =  new Feature({
-      geometry: new Point(fromLonLat([latitude, longitude]))
-    });
-
-    var style = new Style({
-      image: new Icon({
-        src: img_src,
-        scale: 0.25,
-      }),
-      zIndex: 100,
+  const addFeatureToLayer = (latitude: number, longitude: number): Feature => {
+    return  new Feature({
+      geometry: new Point(fromLonLat([latitude, longitude])),
     })
-    feature.setStyle(style);
-    return feature;
   }
 
   return (

@@ -11,7 +11,7 @@ import { useAppSelector } from "../store/hooks";
 import { selectDucks } from "../store/slices/duckSlice";
 import { fromLonLat } from "ol/proj";
 
-const MapComponent: React.FC = () => {
+function MapComponent() {
   //const [map, setMap] = useState<Map | undefined>(undefined);
   const duckList: IDuck[] = useAppSelector(selectDucks);
 
