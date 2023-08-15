@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Map, View, Feature } from "ol";
 import { OSM, Vector } from "ol/source";
 import TileLayer from "ol/layer/Tile.js";
@@ -7,12 +7,12 @@ import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 import { Geometry, Point } from "ol/geom";
 import { fromLonLat } from "ol/proj";
-import IDuck from "../interfaces/DuckInterface";
-import IRabbit from "../interfaces/RabbitInterface";
-import { selectDucks } from "../store/slices/duckSlice";
-import { selectRabbits } from "../store/slices/rabbitSlice";
-import { useAppSelector } from "../store/hooks";
-import { StyledMap } from "../styling/components/Map";
+import IDuck from "../../interfaces/DuckInterface";
+import IRabbit from "../../interfaces/RabbitInterface";
+import { selectDucks } from "../../store/slices/duckSlice";
+import { selectRabbits } from "../../store/slices/rabbitSlice";
+import { useAppSelector } from "../../store/hooks";
+import { StyledMap } from "../../styling/components/Map";
 import BaseLayer from "ol/layer/Base";
 
 function MapComponent() {
@@ -28,67 +28,60 @@ function MapComponent() {
     return layer;
   };
 
+  // var map: Map | undefined;
   const mapRef = useRef<Map|undefined>()
-  const baseLayer: BaseLayer = new TileLayer({
-    source: new OSM(),
-  })
   const duckFeatures: Feature[] = [];
   const rabbitFeatures: Feature[] = [];
   const duckLayer: VectorLayer<Vector<Geometry>> = createVectorLayer([]);
-  const rabbitLayer: VectorLayer<Vector<Geometry>> = createVectorLayer([]);
+  var rabbitLayer: VectorLayer<Vector<Geometry>> = createVectorLayer([]);
 
   useEffect(() => {
     if (!mapRef.current) initMap();
     
     return () => {
+      //mapRef.current.dispose();
     };
   }, []);
   
   useEffect(() => {
+    console.log("map!!!!!",mapRef.current);
     if (!mapRef.current) return;
-    if(duckFeatures.length != duckList.length) updateDucks();
-    if(rabbitFeatures.length != rabbitList.length) updateRabbits();
-    mapRef.current?.setLayers([baseLayer, duckLayer as BaseLayer, rabbitLayer as BaseLayer]);
+    console.log("2 duckList length updated: ", duckList.length);
+    updateDucks();
+
     return () => {
+      //mapRef.current.dispose();
     };
-  }, [duckList.length, rabbitList.length]);
+  }, [duckList.length, mapRef.current]);
 
   const updateDucks = (): void => {
+
     var idx: number, id: number | string | undefined;
     var arr: number[] = [];
+    //console.log("updateDucks function");
+    //console.log("duckFeatures.length",duckFeatures.length);
+    //console.log("duckList.length",duckList.length);
 
     for (let i = 0; i < duckFeatures.length; i++) {
       id = duckFeatures[i].getId();
       idx = duckList.findIndex(duck => duck.id == id);
       if(idx < 0){
+        // remove
+        console.log("remove");
+        
         duckLayer?.getSource()?.removeFeature(duckFeatures[i]);
       } else arr[idx] = 1;
     }
     
     for (let i = 0; i < duckList.length; i++) {
       if(!arr[i]){
+        //console.log("add");
         duckFeatures.push(createFeature(duckList[i]));
-        duckLayer?.getSource()?.addFeature(createFeature(duckList[i]));
-      }
-    }
-  }
-
-  const updateRabbits = (): void => {
-    var idx: number, id: number | string | undefined;
-    var arr: number[] = [];
-
-    for (let i = 0; i < rabbitFeatures.length; i++) {
-      id = rabbitFeatures[i].getId();
-      idx = rabbitList.findIndex(rabbit => rabbit.id == id);
-      if(idx < 0){
-        rabbitLayer?.getSource()?.removeFeature(rabbitFeatures[i]);
-      } else arr[idx] = 1;
-    }
-    
-    for (let i = 0; i < rabbitList.length; i++) {
-      if(!arr[i]){
-        rabbitFeatures.push(createFeature(rabbitList[i]));
-        rabbitLayer?.getSource()?.addFeature(createFeature(rabbitList[i]));
+        duckLayer.getSource()?.addFeature(createFeature(duckList[i]));
+        duckLayer.getSource()?.changed();
+        //console.log(duckLayer.getSource()?.getFeatures())
+        // const layers[] :BaseLayer = mapRef.current?.getLayers();
+        // mapRef.current?.setLayers(layers);
       }
     }
   }
@@ -97,12 +90,15 @@ function MapComponent() {
     mapRef.current = createMap();
     mapRef.current.addLayer(duckLayer);
     mapRef.current.addLayer(rabbitLayer);
-    mapRef.current.addLayer(baseLayer);
+    //console.log("!!!!!!!!!!!!!!!!!",duckLayer.getSource())
   }
 
   const createMap = (): Map => {
     var newMap: Map = new Map({
       layers: [
+        new TileLayer({
+          source: new OSM(),
+        }),
       ],
       target: "map",
       view: new View({

@@ -1,24 +1,34 @@
+import { useEffect, useState } from "react";
 import DuckItem from './DuckItem';
 import IDuck from '../interfaces/DuckInterface'
 import { useAppSelector } from '../store/hooks';
 import { selectDucks } from '../store/slices/duckSlice';
+import { StyledGridContainer, StyledTitle } from '../styling/components/List';
 
 function DuckList() {
-  const duckList: IDuck[] = useAppSelector(selectDucks)
+  const duckList: IDuck[] = useAppSelector(selectDucks);
+
+  useEffect(() => {
+    //console.log("1 duckList length updated: ", duckList.length);
+
+    return () => {
+      //map.dispose();
+    };
+  }, [duckList.length]);
 
   return (
-    <div className='duck-list'>
+    <div>
       {
         duckList.length == 0 ? <div>Loading...</div> : 
       <>
-        <h1 className='duck-list__title' >Duck List</h1>
-          <ul className='duck-list__container'>
+        <StyledTitle>Duck List</StyledTitle>
+          <StyledGridContainer>
             {duckList.map((duck) => (
-              <li key={duck.id}>
+              <div key={duck.id}>
                 <DuckItem key={duck.id} duck={duck} />
-              </li>
+              </div>
             ))}
-          </ul>
+          </StyledGridContainer>
       </>
       }
     </div>

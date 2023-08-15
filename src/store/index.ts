@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import duckReducer from './slices/duckSlice'
+import rabbitReducer from './slices/rabbitSlice'
 
 export const store = configureStore({
   reducer: {
     ducks: duckReducer,
+    rabbits: rabbitReducer,
   },
 })
 
