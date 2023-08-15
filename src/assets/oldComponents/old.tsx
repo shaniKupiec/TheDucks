@@ -6,9 +6,9 @@ import VectorLayer from "ol/layer/Vector";
 import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 import { Point } from "ol/geom";
-import IDuck from "../interfaces/DuckInterface";
-import { useAppSelector } from "../store/hooks";
-import { selectDucks } from "../store/slices/duckSlice";
+import IDuck from "../../interfaces/DuckInterface";
+import { useAppSelector } from "../../store/hooks";
+import { selectDucks } from "../../store/slices/duckSlice";
 import { fromLonLat } from "ol/proj";
 
 function MapComponent() {

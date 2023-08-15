@@ -7,12 +7,12 @@ import Style from "ol/style/Style";
 import Icon from "ol/style/Icon";
 import { Geometry, Point } from "ol/geom";
 import { fromLonLat } from "ol/proj";
-import IDuck from "../interfaces/DuckInterface";
-import IRabbit from "../interfaces/RabbitInterface";
-import { selectDucks } from "../store/slices/duckSlice";
-import { selectRabbits } from "../store/slices/rabbitSlice";
-import { useAppSelector } from "../store/hooks";
-import { StyledMap } from "../styling/components/Map";
+import IDuck from "../../interfaces/DuckInterface";
+import IRabbit from "../../interfaces/RabbitInterface";
+import { selectDucks } from "../../store/slices/duckSlice";
+import { selectRabbits } from "../../store/slices/rabbitSlice";
+import { useAppSelector } from "../../store/hooks";
+import { StyledMap } from "../../styling/components/Map";
 
 function MapComponent() {
   const [map, setMap] = useState<Map | undefined>(undefined);
